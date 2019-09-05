@@ -1,32 +1,20 @@
 About
 =====
 
-A modified version of the `PLOS LaTeX template`_, preconfigured for automated
-preparation of your LaTeX paper for submission in PLOS journals.
+Public source code repository of this scientific paper, titled:
 
-Please cite this project in your papers::
-
-    @misc{template4plos,
-      title={{template4plos public code repository}},
-      author={Mari{\'c}, Petar},
-      year={2019},
-      url={https://github.com/petarmaric/template4plos},
-    }
-
-.. _`PLOS LaTeX template`: https://journals.plos.org/plosone/s/latex
+    An automated workflow for writing and preparing LaTeX papers for submission
+    in PLOS journals
 
 Installation
 ============
 
-This project doesn't require system wide installation, simply `create a new
-repository based on the template4plos repository template`_ and then clone it
-to get started::
+This project doesn't require system wide installation, simply clone it to get
+started::
 
-    $ git clone https://github.com/your-account/your-paper.git
-    $ cd your-paper
+    $ git clone https://github.com/petarmaric/paper-2019-automated-plos-workflow.git
+    $ cd paper-2019-automated-plos-workflow
     $ pipenv install
-
-.. _`create a new repository based on the template4plos repository template`: https://github.com/petarmaric/template4plos/generate
 
 Usage
 =====
@@ -95,15 +83,3 @@ the dockerized version of template4plos instead:
 - prepare your paper for journal submission::
 
     $ ./dockerized.sh export
-
-Contribute
-==========
-
-If you find any bugs, or wish to propose new features `please let us know`_.
-
-If you'd like to contribute, simply fork `the repository`_, commit your changes
-and send a pull request. Make sure you add yourself to `CONTRIBUTORS`_.
-
-.. _`please let us know`: https://github.com/petarmaric/issues/new
-.. _`the repository`: https://github.com/petarmaric
-.. _`CONTRIBUTORS`: https://github.com/petarmaric/template4plos/blob/master/CONTRIBUTORS
