@@ -192,3 +192,17 @@
 \newcommand{\code}[1]{\texttt{#1}}
 
 %% END MACROS SECTION
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TODO: Remove from the final version of the paper
+\usepackage[colorinlistoftodos]{todonotes} % Add 'disable' package option to temporarily disable the display of TODO notes
+\newcommand{\addref}[1]{\todo[inline,color=red!40]{Add and cite BibTeX reference "{#1}"}}
+\newcommand{\addformula}[1]{\missingfigure[color=red!40]{Add formula ({#1})}}
+\newcommand{\addfigure}[1]{\missingfigure[color=red!40]{Add figure: {#1}}}
+\newcommand{\rewrite}[1]{\todo[inline,color=green!40,caption={}]{#1}}
+\newcommand{\rewriteparagraph}{\rewrite{Rewrite paragraph}}
+\newcommand{\finishsection}{\rewrite{Finish working on this section}}
+\newcommand{\whattowrite}[1]{\rewrite{\textbf{What to write about:}\\#1}}
+\newcommand{\inspiration}[1]{\todo[inline,color=teal!40,caption={}]{\textbf{Inspiration:}\\#1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
