@@ -1,7 +1,7 @@
 \section*{\code{latex2plos} tests}
 
-This section is not a part of the original PLOS \LaTeX~template.
-It has been added to demonstrate the commonly used \LaTeX~features that are not present in the PLOS template, and verify that \code{latex2plos} is able to handle them properly.
+This section was not a part of the original PLOS \LaTeX~template.
+It has deliberately been added to the template4plos project \cite{template4plos}, and carried over to this paper as well, to demonstrate the commonly used \LaTeX~features that were not present in the PLOS template, and verify that \code{latex2plos} is able to handle them properly.
 
 \subsection*{\code{verbatiminput}}
 
@@ -11,7 +11,7 @@ It has been added to demonstrate the commonly used \LaTeX~features that are not 
 
 \subsection*{\code{bibliography}}
 
-\code{latex2plos.transformers.BibliographyTransformer} will transform a \verb|\bibliography| file inclusion into its equivalent \verb|\begin{thebibliography}...\end{thebibliography}| call, as demonstrated by this example paper (\code{paper.tex}) and its BiBTeX database (\code{references.bib}).
+\code{latex2plos.transformers.BibliographyTransformer} will transform a \verb|\bibliography| file inclusion into its equivalent \verb|\begin{thebibliography}...\end{thebibliography}| call, as demonstrated by this paper (\code{paper.tex}) and its BiBTeX database (\code{references.bib}).
 
 This is done as PLOS does not allow submission of BiBTeX databases, and instead requires the reference information to be embedded in the paper directly \cite{PLOS:LaTeX}.
 
@@ -58,6 +58,6 @@ It will also transform all figures into the TIFF image format (LZW compression, 
 
 \subsection*{Multiple \LaTeX~files workflow}
 
-\code{latex2plos.transformers.IncludeTransformer} will embed the contents of files referenced by \verb|\include| into the exported paper directly, whereas \code{latex2plos.transformers.InputTransformer} will do the same for \verb|\input|, as demonstrated by this example paper (\code{paper.tex}) and its referenced \code{.tex} files (\code{preamble.tex},  \code{head/*.tex} and \code{sections/*.tex}).
+\code{latex2plos.transformers.IncludeTransformer} will embed the contents of files referenced by \verb|\include| into the exported paper directly, whereas \code{latex2plos.transformers.InputTransformer} will do the same for \verb|\input|, as demonstrated by this paper (\code{paper.tex}) and its referenced \code{.tex} files (\code{preamble.tex},  \code{head/*.tex} and \code{sections/*.tex}).
 
 This is done as PLOS does not allow submission of multiple \code{.tex} files, and instead requires them to be combined into a single, cohesive \code{.tex} file \cite{PLOS:LaTeX}.
