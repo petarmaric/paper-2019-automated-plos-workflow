@@ -1,3 +1,34 @@
-\section*{Discussion}
+\section*{Discussion and results}
 
-\finishsection
+This paper has been created using the proposed automated workflow, and it effectively serves as a practical example of the presented approach.
+For greater transparency the source code for this paper \cite{paper:code} has been publicly released under an OSI approved BSD Open Source license \cite{OSI:BSD}, right from \emph{day one} of its creation.
+
+For paper authors, the proposed automated workflow leads to many practical advantages over using the original PLOS \LaTeX~template directly:
+
+\begin{itemize}
+    \item it's much easier to actually start writing your paper as soon as possible; just click/tap the "Use this template" button on the template4plos GitHub project page \cite{template4plos} to get started
+    \item it makes it very convenient to use Git/GitHub to track changes while writing your paper, or when responding to reviewers
+    \item it automatically checks and prepares your paper for submission in PLOS journals
+    \item it minimizes the potential for reference management/inconsistency errors when preparing the paper for submission; for example you may have made changes to your BiBTeX databases or reordered the \verb|\cite| \LaTeX~commands within the paper, but have also managed to forget to update the manually embedded reference information within the paper - causing out-of-order references, or even displaying stale data
+    \item it allows you to use figures in the standard \LaTeX~manner while writing your paper; it will then automatically copy these figures, transform them into the TIFF image format and finally remove/comment-out them from the exported \code{.tex} manuscript (and its PDF), as per PLOS requirements
+    \item it allows you to store code listings in external files while writing your paper; it will then automatically embed these files into the exported \code{.tex} manuscript
+    \item it allows you to use the standard multiple \LaTeX~files workflow while writing your paper; it will then automatically combine them into a single, cohesive \code{.tex} file, as PLOS does not allow submission of multiple \code{.tex} files
+    \item preparing your paper for submission is no longer a "destructive" process; the act of automated preparation will never disturb any of your original manuscript files and can also be run as often as you'd like
+    \item you don't even have to bother with installing and configuring a \LaTeX~distribution on your system; everything can be done through the Dockerized version of the proposed automated workflow instead
+\end{itemize}
+PLOS journals will see a practical benefit of this approach as well, in the form of a higher level of consistency in their submitted/published papers and a lower frequency of \LaTeX-related support requests.
+
+It's important to recognize and discuss the limitations of the presented approach, namely that the latex2plos project uses a fairly naive (yet quite effective) \LaTeX~parser that is based on regular expressions.
+Because of this, latex2plos will not be able to process \LaTeX~code with extensive "clever" macros as well as the native \LaTeX~toolkit.
+The author would prefer to use a true \LaTeX~parser instead of a regular expressions based solution, but at the moment of this writing he's not aware of a Python library providing such services (basically a \LaTeX~to \LaTeX~source code trans-compiler) in a feature complete manner.
+
+In the end, it's vital to examine the need of keeping this automated workflow in sync with any changes to the PLOS publishing practices, its specific \LaTeX~requirements, and updates to the base PLOS \LaTeX~template.
+After all, every realistically used software or process evolves over time, and instead of trying to fight such changes the author of this paper wishes to embrace them.
+To this effect, the author has also created a small Python powered library and console tool, named version4plos \cite{version4plos}, for automated tracking of new PLOS \LaTeX~template versions, as they're released on the official PLOS \LaTeX~guidelines page \cite{PLOS:LaTeX}.
+He has also setup a cron job on one of his servers to run the version4plos tool daily and report back (via email) if an update has been made to the PLOS \LaTeX~template.
+Once a new PLOS \LaTeX~template release has been detected the projects presented in this paper will also be updated, as needed, to keep them in sync with the newly released template.
+
+The author of this paper has over 14 years of experience in producing and supporting Open Source Software.
+During this period he became a Python Software Foundation contributing member with 30+ Open Source projects created, 27 Python packages published on the Python Package Index and over 500 registered contributions on GitHub in 2019 alone \cite{Maric:GitHub, Maric:PyPI}.
+He has also created and is managing the official country level mirrors for CTAN (Comprehensive \TeX Archive Network), Ubuntu, Arch Linux, MariaDB, CentOS, Debian and MX Linux.
+Because of this, it's clearly visible that he is more than capable of supporting the Open Source projects presented in this paper in the long term; by adding new features, fixing bugs and keeping them up to date with the current PLOS \LaTeX~template.
