@@ -1,3 +1,37 @@
 \section*{Introduction}
 
-\finishsection
+PLOS (the Public Library of Science) is a well known and respected publisher in the scientific community.
+PLOS publishes a host of peer-reviewed scientific journals, and even though the "PLOS One" journal is the specific focus of this work, much of what is discussed here applies directly to their other publications as well.
+
+The overall process of publishing a paper in PLOS journals is very user-friendly, most of the time.
+However it does come with some quirks, and is quite particular about figures and the manuscripts submitted in \LaTeX \cite{LaTeX} format.
+
+For instance its \LaTeX~guidelines \cite{PLOS:LaTeX} requires you to
+use their own custom \LaTeX~template, that's not packaged \cite{CTAN:plos} on CTAN (Comprehensive \TeX Archive Network);
+figures not to be included in the submitted \code{.tex} manuscript and its PDF;
+manually embed the reference information directly into the \code{.tex} manuscript;
+abandon the standard multiple \LaTeX~files workflow and work with a single \code{.tex} file instead.
+Following these rules is not so simple, as some of them impose a one-way ("destructive") process to your manuscript; for example forcing you to forgo BiBTeX databases altogether and instead requiring the reference information to be embedded in the paper directly is a fairly manual and error prone process \cite{PLOS:LaTeX}:
+\begin{enumerate}
+    \item Compose your \LaTeX~manuscript as normal, using \verb|\cite| for reference citations.
+    \item Compile your manuscript using your \code{.bib} file and the \code{plos2015.bst} style file. This process should output a \code{.bbl} file into the same folder as your manuscript.
+    \item Open the \code{.bbl} file and copy/paste its contents into the appropriate position within the manuscript \code{.tex}. Comment out or delete the \code{bibliography} command.
+    \item Compile your manuscript again. The PDF output should be the same as before.
+\end{enumerate}
+
+On the other hand, the PLOS figures guidelines \cite{PLOS:Figures} allows figures to be submitted only as either TIFF or EPS formatted files, while also requiring them to be removed from the submitted \code{.tex} manuscript and its PDF \cite{PLOS:LaTeX}.
+Technically, nothing stops you from keeping the figures included while writing your paper, to give you context while writing and to check how they fit within the resulting PDF; and only removing (or commenting-out) them from your \code{.tex} manuscript prior to submission.
+
+However there are still some serious issues with using TIFF and EPS formatted figures when writing your \LaTeX~paper and preparing it for submission in PLOS journals.
+PLOS stipulates it won't accept EPS figures generated in \LaTeX~or other specialized tools, and that you should convert them to TIFF instead \cite{PLOS:Figures, PLOS:LaTeX}.
+Therefor, for better compatibility and simplicity's sake TIFF format is used exclusively within the automated workflow, presented in this paper.
+TIFF itself poses another challenge, as the commonly used \code{pdftex} tool (which is a version of \TeX~that can create PDF files directly) doesn't support TIFF figures by design; so TIFF formatted figures can't be viewed in your \code{.tex} manuscript (or its PDF) while writing your paper.
+In fact, the \code{pdftex} authors give \emph{very} strong arguments why they'll never (again) support the TIFF format \cite{StackExchange:LaTeX:tiff}.
+This may actually be the reason why PLOS insists on removing the figures from your \code{.tex} manuscript, as the \LaTeX~document wouldn't compile otherwise.
+It's thus unclear why PLOS journals are insistent on TIFF; as JPEG and PNG are well supported, much more commonly used formats on the web and in most programming libraries.
+
+As can be seen from the paragraphs above, preparing a \LaTeX~paper for submission in PLOS journals is a non-trivial process that requires some manual labor - more so if you have a large number of figures that have not been originally created in TIFF or EPS formats.
+In essence, the act of writing the paper is currently divorced from the act of preparing it for submission, where you need to pay special attention when transitioning from one to the other; especially since some pre-submission preparation steps are "destructive" to the original manuscript.
+So it's not as easy to go back into the "writing mode" and make changes; for example updating your BiBTeX databases or reordering the \verb|\cite| \LaTeX~commands within the \code{.tex} manuscript may lead to out-of-order or stale references (see the "Discussion and results" section for details).
+Worse still, this manual and error prone process must be repeated again and again, by each author wishing to contribute to PLOS journals.
+Therefor, the author of this paper has decided to automate this workflow and open it up to the world; in hope of making everyone's life a bit easier and helping to standardize and automate the process of writing and preparing \LaTeX~papers for submission in PLOS journals.
