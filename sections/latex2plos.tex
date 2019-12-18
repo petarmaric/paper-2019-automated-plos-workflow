@@ -1,7 +1,25 @@
-\section*{\code{latex2plos} tests}
+\section*{Project \code{latex2plos}}
 
-This section was not a part of the original PLOS \LaTeX~template.
-It has deliberately been added to the template4plos project \cite{template4plos}, and carried over to this paper as well, to demonstrate the commonly used \LaTeX~features that were not present in the PLOS template, and verify that \code{latex2plos} is able to handle them properly.
+The latex2plos project \cite{latex2plos} is a Python \cite{Python} powered library/console tool for automated preparation of your \LaTeX~paper for submission in PLOS journals, and is at the core of the proposed automated workflow.
+It's designed to address the issues discussed in the "Introduction" section, and resolve them effectively.
+It does so by taking the original \LaTeX~manuscript as its input, transforming the said manuscript and its resources (such as figures, reference information, and code listings) into a submission-ready version of the paper, that conforms to the official PLOS figure and \LaTeX~guidelines \cite{PLOS:Figures, PLOS:LaTeX}.
+For greater transparency the source code of the latex2plos project \cite{latex2plos} has been publicly released under an OSI approved BSD Open Source license \cite{OSI:BSD}, right from \emph{day one} of its creation.
+
+The latex2plos project is composed of three distinct components: a \LaTeX~parser, transformers and console shell interface.
+
+The \LaTeX~parser is based on regular expressions.
+For each line of input the parser first checks if it starts with a commented-out \LaTeX~command, and if not it then looks for characteristic markers that match against a specific transformer.
+If no such marker is found the line is copied as-is, otherwise an appropriate transformer is invoked where it's able to manipulate the \LaTeX~document directly and/or its referenced resources.
+The document itself is processed and streamed through on the fly, for maximum efficiency.
+
+Transformers manipulate the \LaTeX~document and its referenced resources (such as figures, reference information, and code listings), to achieve compliance with the official PLOS figure and \LaTeX~guidelines \cite{PLOS:Figures, PLOS:LaTeX}.
+All transformers are implemented as plugins.
+The dynamic plugin subsystem, based on the \code{simple\_plugins} project \cite{Project:simple_plugins:CodeRepository}, provides automatic transformer plugin discovery and registration.
+
+The author of this paper is a firm believer in the API-centric software development doctrine and, like most of his other Open Source projects, latex2plos is first and foremost a Python library -- with its public API exposed through a console shell interface as well.
+
+This remainder of this section has been carried over from the template4plos project \cite{template4plos}, to demonstrate the commonly used \LaTeX~features that are not present in the original PLOS \LaTeX~template, and verify that the latex2plos project is able to handle them properly.
+While doing that, it also documents the individual transformer plugins.
 
 \subsection*{\code{verbatiminput}}
 
@@ -23,6 +41,7 @@ This is done as PLOS does not allow submission of BiBTeX databases, and instead 
 
 \lstinputlisting[language=Python,caption={\code{friendly\_name\_mixin} project unit tests \cite{Project:friendly_name_mixin:CodeRepository}}]{listings/tests.py}
 
+\pagebreak
 \subsection*{\code{includegraphics}}
 
 \code{latex2plos.transformers.IncludeGraphicsTransformer} will copy over the figures referenced by \verb|\includegraphics| into the papers export directory, as shown in \cref{fig:petar-avatar,fig:3-clamped-free-beam-decimal-precision-errors,fig:barbero-viscoelastic-natural-frequencies,fig:barbero-viscoelastic-damage-analysis}.
