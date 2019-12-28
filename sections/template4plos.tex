@@ -1,0 +1,97 @@
+\section*{Project \code{template4plos}}
+
+The template4plos project \cite{template4plos} provides a reference Open Source Software implementation for the proposed automated workflow.
+To achieve this, it implements a modified version of the PLOS \LaTeX~template, preconfigured for automated preparation of your \LaTeX~paper for submission in PLOS journals.
+For greater transparency the source code of the template4plos project \cite{template4plos} has been publicly released under an OSI approved BSD Open Source license \cite{OSI:BSD}, right from \emph{day one} of its creation.
+
+This project is published in the form of a GitHub template repository \cite{GitHub:help:repository_template}, which allows its users to simply and quickly create GitHub repositories for their own papers, while keeping the original directory and file layout of the template repository.
+It also includes an extensive installation and usage manual, that's distributed with each created paper repository as well.
+
+The template4plos project is composed of three distinct layers, going from inward to outward: a modified version of the PLOS \LaTeX~template, Makefile powered automated workflow, and the utility Dockerized layer.
+
+\subsection*{Layer 0: original PLOS \LaTeX~template}
+
+This layer has been included purely for completeness sake, and is thus not formally counted in the template4plos layer list.
+While technically a (innermost) layer, it's still an externally provided resource \cite{PLOS:LaTeX} from outside the system -- template4plos doesn't introduce anything new to it, at least not directly.
+
+\subsection*{Layer 1: modified version of the PLOS \LaTeX~template}
+
+The modified version of the original PLOS \LaTeX~template is the only layer that's purely static in nature, as it focuses solely on the structure of the \LaTeX~document and doesn't model any of the proposed automated workflow's dynamic behavior.
+It's setup in such a way to allow for minimum bootstrap time when beginning work on your paper.
+
+This layer mimics the original PLOS \LaTeX~template as close as possible, with a few notable exceptions:
+\begin{itemize}
+    \item it's cut up into multiple files, to allow for the standard multiple \LaTeX~files workflow -- the paper itself (\code{paper.tex}), its preamble (\code{preamble.tex}), authors (\code{head/authors.tex}), title (\code{head/title.tex}), abstract (\code{head/abstract.tex}) and the sections (\code{sections/*.tex})
+    \item it uses a BiBTeX database (\code{references.bib}) for reference management, instead of manually embedding reference information into the \LaTeX~document directly
+    \item it introduces additional utility \LaTeX~packages into the template (such as \code{cleveref}, \code{float}, \code{verbatim}, \code{listings}, \code{inconsolata}) as well as a few utility \LaTeX~commands (such as \code{code}), for improved writing experience
+    \item it adds a new section "\code{latex2plos} tests", to demonstrate the commonly used \LaTeX~features that were not present in the original template, and verify that \code{latex2plos} is able to handle them properly
+\end{itemize}
+
+This should also be the only layer that requires updating when a new PLOS \LaTeX~template version is released.
+
+\subsection*{Layer 2: Makefile powered automated workflow}
+
+The Makefile layer provides the dynamic part of the proposed automated workflow, and is composed of the following Makefile tasks/targets:
+\begin{itemize}
+    \item \code{help}, displays template4plos help message
+    \item \code{build}, uses \code{pdftex} and \code{latexmk} to build the paper
+    \item \code{export}, uses \code{latex2plos} to prepare the paper for journal submission
+    \item \code{clean-built}, removes the papers build directory
+    \item \code{clean-exported}, removes the papers export directory
+    \item \code{clean}, removes both the build and export directories
+    \item \code{view-built}, views the papers built PDF file, running \code{build} beforehand if needed
+    \item \code{view-exported}, views the papers exported PDF file, running \code{export} beforehand if needed
+    \item \code{view}, views both the built and exported PDF files
+\end{itemize}
+
+Once you've created and cloned your paper's GitHub repository run the following command to setup the Makefile layer:
+\begin{verbatim}
+    $ pipenv install
+\end{verbatim}
+
+From there on simply write your paper, while keeping in mind you can edit any of its files freely; such as adding/removing sections, adding/removing entries from the \code{references.bib} BiBTeX database, adding more \LaTeX~packages to \code{preamble.tex}, or changing other options.
+But please remember to build (and check) your paper often as you write:
+\begin{verbatim}
+    $ pipenv run make view-built
+\end{verbatim}
+
+\noindent
+Finally, run the following command to prepare your paper for journal submission:
+\begin{verbatim}
+    $ pipenv run make view-exported
+\end{verbatim}
+and then submit files from the export directory to the journal.
+
+\subsection*{Layer 3: Docker powered automated workflow}
+
+The utility Dockerized layer wraps around the Makefile powered workflow, for people who do not wish to bother with installing and configuring a \LaTeX~distribution on their system.
+It cleanly replicates the features of the Makefile powered workflow, while also providing an additional means of software-based reproducibility when building a paper -- the template4plos Docker images are effectively set in stone, and once (automatically) built and published on Docker Hub they are never rebuilt again \cite{template4plos:DockerHub:tags}.
+
+To use the dockerized version of template4plos, simply replace your existing \code{make} calls:
+
+\begin{verbatim}
+    $ pipenv run make [TARGET] ...
+\end{verbatim}
+with:
+\begin{verbatim}
+    $ ./dockerized.sh [TARGET] ...
+\end{verbatim}
+
+\noindent
+For instance, run the following command to show template4plos help:
+\begin{verbatim}
+    $ ./dockerized.sh help
+\end{verbatim}
+
+\noindent
+Or, run the following command to build your paper:
+\begin{verbatim}
+    $ ./dockerized.sh build
+\end{verbatim}
+
+\noindent
+Finally, run the following command to prepare your paper for journal submission:
+\begin{verbatim}
+    $ ./dockerized.sh export
+\end{verbatim}
+and then submit files from the export directory to the journal.
